@@ -9,10 +9,17 @@
     <title>training</title>
 </head>
 <body>
-     
-    <div class="app-wrap">
-        
 
+     <div class="background">
+     <video src="back.mp4" muted loop autoplay></video>
+     </div>
+
+       <div class="audioback">
+        <img src="volumeicond.png" id="area" onclick="ff()">
+        <audio src="backsound.mp3" muted autoplay loop id="backsound"></audio>
+       </div>
+
+    <div class="app-wrap">  
         <header>
             <input type="text" autocomplete="off" class="search-box"
             placeholder="search for city...">
@@ -20,16 +27,15 @@
 
         <main>
             <section class="location">
-            <div class="city">city,country </div>
-            <div class="date">Thursday 10 Junuary 2020</div>
+            <div class="city"></div>
+            <div class="date"></div>
             </section>
 
             <div class="current">
-                <div class="temp">0<span>°c</span></div>
-                <div class="weather">weather</div>
+                <div class="temp"><span></span></div>
+                <div class="weather"></div>
             </div>
         </main>
-
     </div>
   
     <script src="index.js"></script>

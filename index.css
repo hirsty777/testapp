@@ -7,14 +7,33 @@
 }
 
 
-
 body{
    
     font-family: 'Merriweather', serif;
-    background-image: url("image/mix.jpg");
-    background-size: cover;
-    background-position: top center;
+    
 }
+
+/*==============set uo background==========================*/
+.background video{
+       position: absolute;
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+       z-index: -999;
+       filter: opacity(95%);
+}
+
+.audioback img{
+       position: absolute;
+       left: 1rem;
+       top: 1rem;
+       width: 3rem;
+       height: auto;
+}
+/*========================================*/
+
+
+
 
 .app-wrap{
        display: flex;
