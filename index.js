@@ -1,7 +1,7 @@
 const jarea=document.getElementById('area');
 const jbacksound=document.getElementById('backsound');
 const jaudioback=document.querySelector('.audioback');
-const jbackground=document.querySelector('.background');
+const jbackvideo=document.getElementById('backvideo');
 var off=true;
 
 
@@ -10,12 +10,12 @@ var off=true;
 function ff(){
     if(off){
         jarea.src="volumeicon.png";  
-        jbacksound.muted=false;
+        jbackvideo.muted=false;
         off=false;
     }  
     else if(!off){
         jarea.src="volumeicond.png";
-        jbacksound.muted=true;
+        jbackvideo.muted=true;
         off=true;
     }
 };
@@ -54,19 +54,18 @@ function showWeatherReport(weather){
       jweather.innerHTML=`${weather.weather[0].main}`;
 
      
-
+     //weather images and sounds============================
       if(jweather.textContent=="Clouds"){
-          document.body.style.backgroundImage="url(image/clouds.jpg)";
-      }
+          
+        }
       else if(jweather.textContent=="Clear"){
-        document.body.style.backgroundImage="url(image/clear.jpg)";
-      }
+        jbackvideo.src='weather/clearD.mp4';
+    }
       else if(jweather.textContent=="Snow"){
-        document.body.style.backgroundImage="url(image/snow.jpg)";
-      }
+        jbackvideo.src='weather/snowN.mp4';
+    }
       else if(jweather.textContent=="Rain"){
-        document.body.style.backgroundImage="url(image/rain.jpg)";
-        jbacksound.src='sounds/rainS.mp3';
+       
     };
 
       var myDate=new Date();
