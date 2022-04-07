@@ -31,7 +31,7 @@ const searchbox=document.querySelector('.search-box');
 searchbox.addEventListener('keypress',(event)=>{
     if(event.keyCode==13){
           getWeatherReport(searchbox.value);
-          jbackground.style.display='none';
+          searchbox.blur();
     }
 });
 //=================fetch api=========================
@@ -42,7 +42,7 @@ function getWeatherReport(city){
      }).then(showWeatherReport);
 };
 //==============================================================
-function showWeatherReport(weather){
+async function showWeatherReport(weather){
     console.log(weather)
       let jtemp=document.querySelector(".temp");
       jtemp.innerHTML=`${Math.round(weather.main.temp)}<span>°c</span>`;
@@ -55,9 +55,9 @@ function showWeatherReport(weather){
 
      
      //weather images and sounds============================
-      if(jweather.textContent=="Clouds"){
-          
-        }
+    if(jweather.textContent=="Clouds"){
+        jbackvideo.src='weather/cloudsD.mp4';
+    }
       else if(jweather.textContent=="Clear"){
         jbackvideo.src='weather/clearD.mp4';
     }
@@ -65,8 +65,10 @@ function showWeatherReport(weather){
         jbackvideo.src='weather/snowN.mp4';
     }
       else if(jweather.textContent=="Rain"){
-       
+        jbackvideo.src='weather/rainN.mp4';
     };
+
+      
 
       var myDate=new Date();
       let day=myDate.getDay();
