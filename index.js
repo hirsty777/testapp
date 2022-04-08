@@ -2,6 +2,7 @@ const jarea=document.getElementById('area');
 const jbacksound=document.getElementById('backsound');
 const jaudioback=document.querySelector('.audioback');
 const jbackvideo=document.getElementById('backvideo');
+const jloader=document.querySelector('.loader');
 var off=true;
 
 
@@ -30,10 +31,11 @@ const searchbox=document.querySelector('.search-box');
 
 searchbox.addEventListener('keypress',(event)=>{
     if(event.keyCode==13){
-          getWeatherReport(searchbox.value);
-          searchbox.blur();
+        getWeatherReport(searchbox.value);
+        searchbox.blur();
     }
 });
+
 //=================fetch api=========================
 function getWeatherReport(city){
      fetch(`${api.base}?q=${city}&appid=${api.key}&units=metric`)
@@ -41,34 +43,40 @@ function getWeatherReport(city){
          return weather.json();
      }).then(showWeatherReport);
 };
+
 //==============================================================
-async function showWeatherReport(weather){
-    console.log(weather)
-      let jtemp=document.querySelector(".temp");
-      jtemp.innerHTML=`${Math.round(weather.main.temp)}<span>°c</span>`;
+     function showWeatherReport(weather){
+        jloader.style.display='block';
 
-      let jcity=document.querySelector(".city");
-      jcity.innerHTML=`${weather.name},${weather.sys.country}`;
+    //weather============================  
+        if(weather.weather[0].main=="Clear"){
+            jbackvideo.src='weather/clearD.mp4';
+        }
+        else if(weather.weather[0].main=="Clouds"){
+            jbackvideo.src='weather/cloudsD.mp4';
+        }
+        else if(weather.weather[0].main=="Snow"){
+            jbackvideo.src='weather/snowN.mp4';
+        }
+        else if(weather.weather[0].main=="Rain"){
+            jbackvideo.src='weather/rainN.mp4';
+        };    
 
-      let jweather=document.querySelector('.weather');
-      jweather.innerHTML=`${weather.weather[0].main}`;
+ 
+        jbackvideo.onloadedmetadata=()=>{
+        
+        jloader.style.display='none';
+        
+        let jtemp=document.querySelector(".temp");
+        jtemp.innerHTML=`${Math.round(weather.main.temp)}<span>°c</span>`;
 
-     
-     //weather images and sounds============================
-    if(jweather.textContent=="Clouds"){
-        jbackvideo.src='weather/cloudsD.mp4';
-    }
-      else if(jweather.textContent=="Clear"){
-        jbackvideo.src='weather/clearD.mp4';
-    }
-      else if(jweather.textContent=="Snow"){
-        jbackvideo.src='weather/snowN.mp4';
-    }
-      else if(jweather.textContent=="Rain"){
-        jbackvideo.src='weather/rainN.mp4';
-    };
+        let jcity=document.querySelector(".city");
+        jcity.innerHTML=`${weather.name},${weather.sys.country}`;
 
-      
+        let jweather=document.querySelector('.weather');
+        jweather.innerHTML=`${weather.weather[0].main}`;
+
+
 
       var myDate=new Date();
       let day=myDate.getDay();
@@ -102,6 +110,7 @@ async function showWeatherReport(weather){
       };
      
      let jdate=document.querySelector(".date");
-     jdate.innerHTML=day+" "+dayNumb+"/"+monthNumb+"/"+yearNumb;
+     jdate.innerHTML=day+" "+dayNumb+"/"+monthNumb+"/"+yearNumb;  
+     };  
 
 };
