@@ -5,8 +5,10 @@ const jbackvideo=document.getElementById('backvideo');
 const jloader=document.querySelector('.loader');
 var off=true;
 
-
-
+let jcity=document.querySelector(".city");
+let jdate=document.querySelector(".date");
+let jtemp=document.querySelector(".temp");
+let jweather=document.querySelector(".weather");
 
 function ff(){
     if(off){
@@ -33,6 +35,13 @@ searchbox.addEventListener('keypress',(event)=>{
     if(event.keyCode==13){
         getWeatherReport(searchbox.value);
         searchbox.blur();
+        searchbox.value="";
+        //empty html before it loads files
+        jtemp.innerHTML='';
+        jcity.innerHTML='';
+        jweather.innerHTML='';
+        jdate.innerHTML='';
+        document.body.style.backgroundColor='black';
     }
 });
 
@@ -67,13 +76,10 @@ function getWeatherReport(city){
         
         jloader.style.display='none';
         
-        let jtemp=document.querySelector(".temp");
         jtemp.innerHTML=`${Math.round(weather.main.temp)}<span>°c</span>`;
 
-        let jcity=document.querySelector(".city");
         jcity.innerHTML=`${weather.name},${weather.sys.country}`;
 
-        let jweather=document.querySelector('.weather');
         jweather.innerHTML=`${weather.weather[0].main}`;
 
 
@@ -109,7 +115,7 @@ function getWeatherReport(city){
                                   
       };
      
-     let jdate=document.querySelector(".date");
+     
      jdate.innerHTML=day+" "+dayNumb+"/"+monthNumb+"/"+yearNumb;  
      };  
 
